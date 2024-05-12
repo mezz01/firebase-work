@@ -14,6 +14,9 @@ import {
   doc,
 } from "firebase/firestore";
 import { Question } from './components/questions';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+import Survey from './components/survey';
+
 
 
 
@@ -28,19 +31,15 @@ function App() {
   getSurvey();
   },[])
 
+  /* Getting data using the new firebase hooks method :
+  const query = collection(db, "survey");
+  const [docs, loading, error] = useCollectionData(query);
+  const [snapshot, ld, err] = useDocument(reference);
+  console.log(snapshot);*/
+
   return (
     <>
-    <h1>hello</h1>
-      {survey.map((srv) => {
-        return (
-        <>
-        <h1>{srv.id}</h1>
-        <h2>{srv.title}</h2>
-        <h3>{srv.description}</h3>
-        <Question path={`survey/${srv.id}/questions`} />
-        </>
-        )
-      })}
+      <Survey />
     </>
   )
 }
